@@ -1,0 +1,47 @@
+.circle {
+  fill: none;
+  stroke: gray;
+  stroke-dasharray: 4, 4;
+}
+
+.axis {
+  stroke: #000;
+  stroke-width: 1;
+}
+
+.arc--av {
+  fill: #0d5a9e;
+  stroke: none;
+}
+
+.arc-av-labels {
+  fill: none;
+  stroke: none;
+}
+
+.arc--rv {
+  fill: transparent;
+  stroke: #000;
+  stroke-width: 3px;
+}
+
+.arc--series {
+  fill: #fff;
+  stroke: #000;
+  stroke-width: 1;
+}
+
+.label--arc {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  fill: #333;
+}
+
+.label--series-arc {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  fill: #fff;
+  text-transform: uppercase;
+}
