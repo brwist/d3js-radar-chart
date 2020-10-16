@@ -5,11 +5,10 @@ const innerRadius = 10,
   width = outerRadius * 2 + seriesArcHeight * 2 + margin,
   height = outerRadius * 2 + seriesArcHeight * 2 + margin;
 
-
 const data = [
   { series: "Innovation", av: 2.32, rv: 1.7 },
   { series: "Selling Skills", av: 2.92, rv: 2 },
-  { series: "Territory Management and Business Skills", av: 1.6, rv: 2.3 },
+  { series: "Territory Management & Business Skills", av: 1.6, rv: 2.3 },
   { series: "Customer Relations", av: 3.39, rv: 2 },
   { series: "Internal Communication", av: 3.2, rv: 2 },
   { series: "Competitiveness", av: 2.67, rv: 3.3 },
@@ -89,11 +88,13 @@ for (let i = 0; i < sectors; i++) {
     .style("fill", () => color(i));
 
   // Append Series labels
-  svg
+  const seriesLabels = svg
     .append("text")
     .attr("class", "label--series-arc")
     .attr("dx", "-0.5rem")
-    .attr("dy", "1.5rem")
+    .attr("dy", "1.5rem");
+
+  seriesLabels
     .append("textPath")
     .attr("xlink:href", `#arc-series-${i}`)
     .style("text-anchor", "middle")
@@ -101,6 +102,12 @@ for (let i = 0; i < sectors; i++) {
       startAngle > (90 * Math.PI) / 180 ? "75%" : "25%"
     )
     .text(data[i].series);
+
+  // Handle multiline labels
+  seriesLabels.each(function () {
+    if (this.getComputedTextLength() > outerRadius)
+      wrap(d3.select(this), outerRadius);
+  });
 }
 
 // Pies for the Required Values should lie on top, so draw them next
@@ -158,4 +165,58 @@ for (let i = 0; i < sectors; i++) {
       startAngle > (90 * Math.PI) / 180 ? "75%" : "25%"
     )
     .text(data[i].av);
+}
+
+// Helper function for wrapping labels
+function wrap(text, width) {
+  text.each(function () {
+    let text = d3.select(this),
+      words = text.text().split(/\s+/).reverse(),
+      word,
+      line = [],
+      dx = parseFloat(text.attr("dx")),
+      dy = parseFloat(text.attr("dy")),
+      textPath = text.select("textPath"),
+      textPathOffset = textPath.attr("startOffset"),
+      textPathLink = textPath.attr("xlink:href"),
+      tspan;
+
+    text.attr("dx", null).attr("dy", null).text(null);
+
+    textPath = text
+      .append("textPath")
+      .attr("startOffset", textPathOffset)
+      .style("text-anchor", "middle")
+      .attr("xlink:href", textPathLink);
+
+    tspan = textPath
+      .append("tspan")
+      .attr("dx", `${dx}rem`)
+      .attr("dy", `${dy - 0.5}rem`)
+      .attr("text-anchor", "middle");
+
+    while ((word = words.pop())) {
+      line.push(word);
+
+      tspan.text(line.join(" "));
+      if (tspan.node().getComputedTextLength() > width) {
+        line.pop();
+        tspan.text(line.join(" "));
+        line = [word];
+
+        textPath = text
+          .append("textPath")
+          .attr("startOffset", textPathOffset)
+          .style("text-anchor", "middle")
+          .attr("xlink:href", textPathLink);
+
+        tspan = textPath
+          .append("tspan")
+          .attr("dx", `${dx}rem`)
+          .attr("dy", `${dy - 0.65}rem`)
+          .attr("text-anchor", "middle")
+          .text(word);
+      }
+    }
+  });
 }
