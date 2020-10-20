@@ -2,8 +2,14 @@ const innerRadius = 10,
   outerRadius = 150,
   seriesArcHeight = 40,
   margin = 10,
-  width = outerRadius * 2 + seriesArcHeight * 2 + margin,
+  windowWidth = document.body.clientWidth,
+  windowHeight = document.body.clientHeight;
+
+let width = outerRadius * 2 + seriesArcHeight * 2 + margin,
   height = outerRadius * 2 + seriesArcHeight * 2 + margin;
+
+width = width > windowWidth ? width : windowWidth;
+height = height > windowHeight ? height : windowHeight;
 
 const data = [
   { series: "Innovation", av: 2.32, rv: 1.7 },
@@ -19,11 +25,6 @@ const color = d3
   .range(["#183153", "#d24518", "#03928d", "#1e9de0", "#b1165b", "#e8c600"]);
 
 const y = d3.scaleLinear().range([innerRadius, outerRadius]).domain([0, 4]);
-
-const pie = d3
-  .pie()
-  .sort(null)
-  .value((d) => d);
 
 const svg = d3
   .select("body")
@@ -166,6 +167,79 @@ for (let i = 0; i < sectors; i++) {
     )
     .text(data[i].av);
 }
+
+// Append tooltip
+const tooltip = d3
+  .select("body")
+  .append("div")
+  .attr("class", "tooltip")
+  .style("opacity", 0);
+
+// Append dotted line
+const dottedLine = svg
+  .append("path")
+  .attr("d", `M${innerRadius},0 L${outerRadius},0`)
+  .attr("class", "dotted-line");
+
+const pie = d3
+  .pie()
+  .sort(null)
+  .value((d) => d.av);
+
+startAngle = (-90 * Math.PI) / 180;
+svg
+  .selectAll(".arc--tooltip")
+  .data(pie(data))
+  .enter()
+  .append("path")
+  .attr("class", "arc--tooltip")
+  .attr(
+    "d",
+    d3
+      .arc()
+      .innerRadius(0)
+      .outerRadius(outerRadius + seriesArcHeight)
+      .startAngle(() => startAngle)
+      .endAngle((d, i) => {
+        let endAngle =
+          (-90 * Math.PI) / 180 + (2 * Math.PI * (i + 1)) / sectors;
+        startAngle = endAngle;
+        return endAngle;
+      })
+  )
+  .on("mouseover", function (e, d) {
+    const c = d3.pointer(e);
+
+    dottedLine.style("visibility", "visible");
+    dottedLine.attr("d", `M0,0 L${c[0]},${c[1]}`);
+    dottedLine.raise();
+
+    tooltip.transition().duration(200).style("opacity", 0.9);
+
+    tooltip
+      .html(
+        `<b>${d.data.series}</b><br>Acquired Value: ${d.data.av}<br>Required Values: ${d.data.rv}`
+      )
+      .style("left", `${e.pageX + 10}px`)
+      .style("top", `${e.pageY}px`);
+  })
+  .on("mousemove", function (e, d) {
+    const c = d3.pointer(e);
+
+    dottedLine.attr("d", `M0,0 L${c[0]},${c[1]}`);
+
+    tooltip
+      .html(
+        `<b>${d.data.series}</b><br>Acquired Value: ${d.data.av}<br>Required Values: ${d.data.rv}`
+      )
+      .style("left", `${e.pageX + 10}px`)
+      .style("top", `${e.pageY}px`);
+  })
+  .on("mouseout", function () {
+    dottedLine.style("visibility", "hidden");
+
+    tooltip.transition().duration(500).style("opacity", 0);
+  });
 
 // Helper function for wrapping labels
 function wrap(text, width) {
