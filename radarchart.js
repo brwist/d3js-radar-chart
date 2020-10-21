@@ -32,7 +32,7 @@ function radarChart() {
 
       if (data[0].active)
         content += `<div class="t-content">
-                      <img src="/img/info.png" class="t-img" />
+                      <img src="img/info.png" class="t-img" />
                       <div class="t-text">
                         <u><b>Acquired</b></u>
                         Innovation: ${d.data.av}
@@ -41,7 +41,7 @@ function radarChart() {
 
       if (data[1].active)
         content += `<div class="t-content">
-                      <img src="/img/checked.png" class="t-img" />
+                      <img src="img/checked.png" class="t-img" />
                       <div class="t-text">
                         <u><b>Required</b></u>
                         Innovation: ${d.data.rv}
