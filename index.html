@@ -7,7 +7,36 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="wrapper">
+    <div class="chart" id="chart-1"></div>
+    <div class="chart" id="chart-2"></div>
+  </div>
   <script src="//d3js.org/d3.v6.min.js"></script>
   <script src="radarchart.js"></script>
+  <script>
+    const data1 = [
+      { series: "Innovation", av: 2.32, rv: 1.7 },
+      { series: "Selling Skills", av: 2.92, rv: 2 },
+      { series: "Territory Management & Business Skills", av: 1.6, rv: 2.3 },
+      { series: "Customer Relations", av: 3.39, rv: 2 },
+      { series: "Internal Communication", av: 3.2, rv: 2 },
+      { series: "Competitiveness", av: 2.67, rv: 3.3 },
+    ];
+
+    const data2 = [
+      { series: "Product 1", av: 3.39, rv: 2 },
+      { series: "Product 2", av: 1.6, rv: 2.3 },
+      { series: "Product 3", av: 2.32, rv: 1.7 },
+      { series: "Product 4", av: 2.92, rv: 2 }
+    ];
+
+    d3.select("#chart-1")
+      .datum(data1)
+      .call(new radarChart());
+
+    d3.select("#chart-2")
+      .datum(data2)
+      .call(new radarChart());
+  </script>
 </body>
 </html>
