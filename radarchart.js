@@ -309,6 +309,9 @@ function radarChart() {
         .append("path")
         .attr("class", "arc--tooltip")
         .attr("d", arcTooltip)
+        .on("click", function () {
+          window.location.href = "https://www.google.com";
+        })
         .on("mouseover", function (e, d) {
           let arcAV_highlighted = d3
             .arc()
