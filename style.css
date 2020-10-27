@@ -21,7 +21,8 @@ body {
   background-color: #dddddd;
 }
 #chart-2 {
-  background-color: #e6e6e6;
+  background-color: #dddddd;
+  margin-left: 100px;
 }
 
 .circle {
@@ -147,4 +148,121 @@ div.tooltip {
 
 .legend-item.pushed .legend-rect {
   fill-opacity: 0.75;
+}
+
+.chart-container {
+  background-color: #e6e6e6;
+  padding: 20px;
+}
+
+.chart-title {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.main-content-container {
+  display: contents
+}
+
+.main-content-container .row{
+  width: 100%;
+}
+
+.text-list {
+  text-align: end;
+}
+
+/*
+ * Sidebar
+ */
+
+ .sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100; /* Behind the navbar */
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.sidebar-sticky {
+  position: relative;
+  top: 0;
+  height: calc(100vh - 48px);
+  padding-top: .5rem;
+  overflow-x: hidden;
+  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+@supports ((position: -webkit-sticky) or (position: sticky)) {
+  .sidebar-sticky {
+    position: -webkit-sticky;
+    position: sticky;
+  }
+}
+
+.sidebar .nav-link {
+  font-weight: 500;
+  color: #333;
+}
+
+.sidebar .nav-link .feather {
+  margin-right: 4px;
+  color: #999;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  position: absolute;
+}
+
+.sidebar .nav-link.active {
+  color: #007bff;
+}
+
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
+  color: inherit;
+}
+
+.sidebar-heading {
+  font-size: .75rem;
+  text-transform: uppercase;
+}
+
+.chevron-nav {
+  position: absolute;
+  right: 0%;
+}
+
+.text-nav {
+  margin-left: 28px;
+}
+
+/*
+ * Navbar
+ */
+
+ .navbar-brand {
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  font-size: 1rem;
+  background-color: rgba(0, 0, 0, .25);
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+}
+
+.navbar .form-control {
+  padding: .75rem 1rem;
+  border-width: 0;
+  border-radius: 0;
+}
+
+.form-control-dark {
+  color: #fff;
+  background-color: rgba(255, 255, 255, .1);
+  border-color: rgba(255, 255, 255, .1);
+}
+
+.form-control-dark:focus {
+  border-color: transparent;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
 }
