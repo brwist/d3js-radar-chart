@@ -22,7 +22,6 @@ body {
 }
 #chart-2 {
   background-color: #dddddd;
-  margin-left: 100px;
 }
 
 .circle {
@@ -172,6 +171,21 @@ div.tooltip {
   text-align: end;
 }
 
+@media (min-width: 1756px) {
+  #chart-2 {
+    margin-left: 100px;
+  }
+}
+
+@media (max-width: 1630px) {
+  .wrapper {
+    display: block;
+    text-align: center;
+  }
+}
+
+@media (max-width: 1250px) {
+}
 /*
  * Sidebar
  */
