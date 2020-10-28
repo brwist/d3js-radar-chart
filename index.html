@@ -11,15 +11,18 @@
 <body>
   <!-- Image and text -->
   <nav class="navbar navbar-light border-bottom">
-    <a class="navbar-brand" href="#">
-      <!-- <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""> -->
-      Logo
-    </a>
+    <div>
+      <button class="btn btn-menu" id="sidebarCollapse"><i class="fa fa-bars"></i></button>
+      <a class="navbar-brand" href="#">
+        <!-- <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""> -->
+        Logo
+      </a>
+    </div>
   </nav>
 
   <div class="container-fluid">
     <div class="row">
-      <nav class="col-md-2 d-none d-md-block sidebar">
+      <nav class="col-md-2 d-none d-md-block sidebar" id="sidebar">
         <div class="sidebar-sticky">
           <ul class="nav flex-column">
             <li class="nav-item border-bottom">
@@ -47,37 +50,33 @@
       </nav>
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-          <div class="container main-content-container">
-            <div class="row">
-              <div class="col-15 col-md-10">
-                <div class="wrapper">
-                  <div>
-                    <div class="chart-title">
-                      <h5>Skils</h5>
-                    </div>
-                    <div class="chart-container">
-                      <div class="chart" id="chart-1"></div>
-                    </div>
-                  </div>
-                  <div>
-                    <div class="chart-title">
-                      <h5>Product Knowledge</h5>
-                    </div>
-                    <div class="chart-container">
-                      <div class="chart" id="chart-2"></div>
-                    </div>
-                  </div>
+          <div class="main-container">
+            <div class="wrapper">
+              <div>
+                <div class="chart-title">
+                  <h5>Skils</h5>
+                </div>
+                <div class="chart-container">
+                  <div class="chart" id="chart-1"></div>
                 </div>
               </div>
-              <div class="col-3 col-md-2">
-                <div class="text-list">
-                  <a class="nav-link active" href="#">
-                    Training Lists & Tasks
-                  </a>
+              <div>
+                <div class="chart-title">
+                  <h5>Product Knowledge</h5>
+                </div>
+                <div class="chart-container">
+                  <div class="chart" id="chart-2"></div>
                 </div>
               </div>
             </div>
-          </div>          
+            <div>
+              <div class="text-list">
+                <a class="nav-link active" href="#">
+                  Training Lists & Tasks
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     </div>
@@ -87,11 +86,22 @@
   <script>
     feather.replace()
   </script>
+  <!-- jQuery CDN - Slim version (=without AJAX) -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   <script src="https://d3js.org/d3.v6.min.js"></script>
   <script src="radarchart.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      console.log('hello');
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+            $('.overlay').addClass('active');
+        });
+    });
+  </script>
   <script>
     const data1 = [
       { series: "Innovation", av: 2.32, rv: 1.7 },

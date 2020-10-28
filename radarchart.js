@@ -78,8 +78,10 @@ function radarChart() {
         .append("svg")
         .attr("width", width)
         .attr("height", height)
+        .attr('viewBox','0 0 '+Math.min(width,height) +' '+Math.min(width,height) )
+        .attr('preserveAspectRatio','xMinYMin')
         .append("g")
-        .attr("transform", `translate(${width / 2},${height / 2})`);
+        .attr("transform", "translate(" + Math.min(width,height) / 2 + "," + Math.min(width,height) / 2 + ")");
 
       // Append circle ticks
       svg

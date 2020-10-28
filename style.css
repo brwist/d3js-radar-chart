@@ -17,6 +17,11 @@ body {
   flex: 1;
 }
 
+.main-container {
+  display: flex;
+  width: 100%;
+}
+
 #chart-1 {
   background-color: #dddddd;
 }
@@ -169,6 +174,33 @@ div.tooltip {
 
 .text-list {
   text-align: end;
+  width: 181px;
+}
+
+.navbar-brand {
+  height: 36px;
+  margin-left: 1rem;
+  padding-top: 0px !important;
+}
+
+#sidebarCollapse {
+  display: none;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 998;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.overlay.active {
+  display: block;
+  opacity: 1;
 }
 
 @media (min-width: 1756px) {
@@ -184,7 +216,17 @@ div.tooltip {
   }
 }
 
-@media (max-width: 1250px) {
+@media (max-width: 1124px) {
+  .sidebar {
+    min-width: 165px !important;
+  }
+}
+
+@media (max-width: 1092px) {
+  .main-container {
+    display: block;
+    width: fit-content;
+  }
 }
 /*
  * Sidebar
@@ -196,6 +238,7 @@ div.tooltip {
   bottom: 0;
   left: 0;
   z-index: 100; /* Behind the navbar */
+  min-width: 187px;
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
 }
 
@@ -238,6 +281,14 @@ div.tooltip {
   color: inherit;
 }
 
+#sidebar.active {
+  display: block !important;
+  position: absolute;
+  top: 8%;
+  background-color: white;
+  height: 146%;
+}
+
 .sidebar-heading {
   font-size: .75rem;
   text-transform: uppercase;
@@ -250,6 +301,15 @@ div.tooltip {
 
 .text-nav {
   margin-left: 28px;
+}
+
+@media (max-width: 766px) {
+  .sidebar-sticky {
+    height: auto;
+  }
+  #sidebarCollapse {
+    display: inline-block;
+  }
 }
 
 /*
