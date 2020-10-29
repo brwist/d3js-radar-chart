@@ -250,6 +250,9 @@ div.tooltip {
   #flexContent {
     justify-content: space-between !important;
   }
+  #mainContainer {
+    padding-left: 0px !important;
+  }
 }
 /*
  * Sidebar
