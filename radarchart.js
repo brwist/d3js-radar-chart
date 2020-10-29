@@ -78,7 +78,7 @@ function radarChart() {
         .append("svg")
         .attr("width", width)
         .attr("height", height)
-        .attr('viewBox','0 0 '+Math.min(width,height) +' '+Math.min(width,height) )
+        .attr('viewBox','0 0 '+(Math.min(width,height) +30) +' '+(Math.min(width,height)+30) )
         .attr('preserveAspectRatio','xMinYMin')
         .append("g")
         .attr("transform", "translate(" + Math.min(width,height) / 2 + "," + Math.min(width,height) / 2 + ")");
