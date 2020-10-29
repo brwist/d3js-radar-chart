@@ -94,8 +94,18 @@
   <script src="https://d3js.org/d3.v6.min.js"></script>
   <script src="radarchart.js"></script>
   <script type="text/javascript">
+    window.addEventListener('click', function(e){
+      if (document.getElementById('sidebar').contains(e.target)){
+      } else{
+        if ($("#sidebar").find(".active").length > 0){ 
+          $('#sidebar').removeClass('active');
+        }
+      }
+    })
     $(document).ready(function () {
-      console.log('hello');
+      $('#sidebarCollapse').click(function(event){
+        event.stopPropagation();
+      });
         $('#sidebarCollapse').on('click', function () {
             $('#sidebar').toggleClass('active');
             $('.overlay').addClass('active');
