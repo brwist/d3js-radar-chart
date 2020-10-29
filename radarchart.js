@@ -369,8 +369,8 @@ function radarChart() {
 
           tooltip
             .html(tooltipContent(d))
-            .style("left", `${e.pageX + 10}px`)
-            .style("top", `${e.pageY}px`);
+            .style("left", `${e.pageX - 400}px`)
+            .style("top", `${e.pageY - 30}px`);
         })
         .on("mousemove", function (e, d) {
           const c = d3.pointer(e);
@@ -379,8 +379,8 @@ function radarChart() {
 
           tooltip
             .html(tooltipContent(d))
-            .style("left", `${e.pageX + 10}px`)
-            .style("top", `${e.pageY}px`);
+            .style("left", `${e.pageX - 400}px`)
+            .style("top", `${e.pageY - 30}px`);
         })
         .on("mouseout", function (e, d) {
           avSlices
