@@ -78,8 +78,10 @@ function radarChart() {
         .append("svg")
         .attr("width", width)
         .attr("height", height)
+        .attr('viewBox','0 0 '+(Math.min(width,height) +30) +' '+(Math.min(width,height)+30) )
+        .attr('preserveAspectRatio','xMinYMin')
         .append("g")
-        .attr("transform", `translate(${width / 2},${height / 2})`);
+        .attr("transform", "translate(" + Math.min(width,height) / 2 + "," + Math.min(width,height) / 2 + ")");
 
       // Append circle ticks
       svg
@@ -367,8 +369,8 @@ function radarChart() {
 
           tooltip
             .html(tooltipContent(d))
-            .style("left", `${e.pageX + 10}px`)
-            .style("top", `${e.pageY}px`);
+            .style("left", `${e.pageX - 400}px`)
+            .style("top", `${e.pageY - 30}px`);
         })
         .on("mousemove", function (e, d) {
           const c = d3.pointer(e);
@@ -377,8 +379,8 @@ function radarChart() {
 
           tooltip
             .html(tooltipContent(d))
-            .style("left", `${e.pageX + 10}px`)
-            .style("top", `${e.pageY}px`);
+            .style("left", `${e.pageX - 400}px`)
+            .style("top", `${e.pageY - 30}px`);
         })
         .on("mouseout", function (e, d) {
           avSlices
